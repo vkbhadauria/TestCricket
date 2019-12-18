@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+<script type="text/javascript">
+var url = (window.location).href;
+var id = url.substring(url.lastIndexOf('/') + 1);
+$.get('http://www.localhost:8000/api/team/'+id, function(res){
+		var teamTable = $('#team_details');
+		var i = 0;
+		// debugger;
+		var newRow1 = $("<tr>");
+		newRow1.append($('<td> Name: '+res.name+'</td>'))
+		newRow1.append($('<td>Total point: '+res.total_point+'</td>'))
+		newRow1.append($('<td><img src="'+res.logo+'" height="100" width="100"/></td>'))
+		teamTable.append(newRow1)
+
+		var playertable = $('#playerlist');
+		var i = 1;
+		var newRow1 = $("<tr>");
+		playertable.append(newRow1)
+		for (i = 1; i <= res.player.length; i++) {
+			// debugger;
+			var newRow = $("<tr>");
+			newRow.append($('<td>'+i+'</td>'));
+			newRow.append($('<td>'+res.player[i].email+'</td>'));
+		  	newRow.append($('<td>'+res.player[i].first_name+'</td>'));
+		  	newRow.append($('<td>'+res.player[i].last_name+'</td>'));
+		  	newRow.append($('<td><img src="'+res.player[i].profile.image+'" height="100" width="100"/></td>'));
+		  	playertable.append(newRow);
+		}
+		
+		
+})
+</script>
+<body style="align:center">
+	<h2>Teams Details</h2>
+	<table id="team_details"  class="table">
+		<thead> </thead> <tbody> </tbody> </table> 
+	</table>
+		<h2>Player List</h2>
+	<table id="playerlist"  class="table">
+		<thead> <th>Sr. no.</th><th>Email</th><th>First Name</th><th>Last Name</th><th>Image</th></thead> <tbody> </tbody> </table> 
+	</table>
+</body>
+
+{% endblock %}
