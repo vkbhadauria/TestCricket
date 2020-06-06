@@ -10,7 +10,7 @@ Click==7.0
 createsend==6.0.0
 cryptography==2.6.1
 decorator==4.4.0
-Django==2.2.1
+Django==2.2.13
 djangorestframework==3.11.0
 docutils==0.14
 durationpy==0.5
